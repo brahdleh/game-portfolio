@@ -5,16 +5,16 @@ import BlogPostCard from './components/BlogPostCard'
 import UpdateCard from './components/UpdateCard'
 
 const games = [
-  { id: 1, title: 'Idle Revelations', image: '/placeholder.svg?height=200&width=300', description: 'Incremental clicker following our understanding of the universe through the ages.' },
+  { id: 1, title: 'Idle Revelations', image: '/placeholder.svg?height=200&width=300', description: 'Incremental clicker following our discovery of the universe through the ages.' },
   { id: 2, title: 'Coming Soon', image: '/placeholder.svg?height=200&width=300', description: 'Something new will arrive eventually- have a little patience!' },
 ]
 
 const blogPosts = [
-  { id: 1, title: 'Cursor + Unity: my experience so far...', date: '2024-11-15', excerpt: 'AI can is part and parcel of web development, but how well does it work in mobile game dev...' },
+  { id: 1, title: 'Cursor + Unity: my experience so far...', date: '2024-11-15', 'image': '/placeholder.svg?height=200&width=300', excerpt: 'AI can is part and parcel of web development, but how well does it work in mobile game development?' },
 ]
 
 const recentUpdates = [
-  { id: 1, title: 'One step closer to relasing IDLE Revelations', date: '2024-11-25', type: 'game' },
+  { id: 1, title: 'One step closer to releasing Idle Revelations', date: '2024-11-25', type: 'game' },
   { id: 2, title: 'Blog Post: Cursor + Unity: my experience so far...', date: '2024-11-15', type: 'blog' },
   { id: 3, title: 'IDLE Revelations make-over', date: '2024-10-05', type: 'game' },
 ]
@@ -31,7 +31,7 @@ export default function Home() {
         </p>
         <p className="text-base leading-relaxed">
           No longer shall the community be served tedious, derivative, monitarily focused games!
-          Come along with me on this journey to deliver novel additions to a genre that I hold so dear.
+          Come along with me on this journey to deliver novel additions to a genre that has kept us entertained for years.
         </p>
       </section>
 

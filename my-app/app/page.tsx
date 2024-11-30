@@ -30,7 +30,7 @@ export default function Home() {
           Soaking up everything the idle incremental space had to offer, I feel more than ready to throw my hat into the ring as a developer.
         </p>
         <p className="text-base leading-relaxed">
-          No longer shall the community be served tedious, derivative, monitarily focused games!
+          No longer shall the community be served tedious, derivative, money hungry games!
           Come along with me on this journey to deliver novel additions to a genre that has kept us entertained for years.
         </p>
       </section>

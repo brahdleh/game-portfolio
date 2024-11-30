@@ -5,13 +5,13 @@ const games = [
   { 
     id: 1, 
     title: 'Idle Revelations', 
-    image: '/workspaces/game-portfolio/my-app/app/images/institutions_30nov.svg', 
+    image: '/institutions_30nov.png?', 
     description: 'Incremental clicker following our discovery of the universe through the ages. Embark on an epic journey to carry the human race through thousands of years of discovery and knowledge.',
     features: ['Multi-Layer Prestige', 'Engaging Story', 'Novel Mechanics','Clicking (Optional)'],
     longDescription: `
       This is my first game, taking strong inspiration from Idle games I have played in the past, and continue to play now. There are multiple currencies that centre around education and knowledge, these must be accumulated to progress through the tree of understanding. 
       As the game goes on, the player prestiges in multiple tiers of reset, unlocking automation and huge boosts.
-      <image src={'/placeholder.svg?height=400&width=600'} alt={game.title} width={500} height={300}/>
+      <Image src={'/institutions_30nov.png?'} alt={game.title} width={500} height={300}/>
     `
   },
 ]
@@ -29,7 +29,7 @@ export default async function GamePage({ params }: { params: { id: string } }) {
       <h1 className="text-4xl font-bold mb-8 text-center">{game.title}</h1>
       <p className="text-lg leading-relaxed mb-8">{game.description}</p>
       <div className="gap-12 mb-12">
-        <Image src={game.image} alt={game.title} width={500} height={300} className="rounded-lg shadow-lg w-full" />
+        <Image src={game.image} alt={game.title} width={250} height={100} className="rounded-lg shadow-lg mb-10" />
         <div className="space-y-4">
           <h2 className="text-2xl font-bold">Key Features:</h2>
           <ul className="list-disc list-inside space-y-1">

@@ -5,18 +5,20 @@ const games = [
   { 
     id: 1, 
     title: 'Idle Revelations', 
-    image: '/placeholder.svg?height=400&width=600', 
+    image: '/workspaces/game-portfolio/my-app/app/images/institutions_30nov.svg', 
     description: 'Incremental clicker following our discovery of the universe through the ages. Embark on an epic journey to carry the human race through thousands of years of discovery and knowledge.',
-    features: ['Multi-Layer Prestige', 'Gripping Story', 'Novel Mechanics','Optional Clicking'],
+    features: ['Multi-Layer Prestige', 'Engaging Story', 'Novel Mechanics','Clicking (Optional)'],
     longDescription: `
       This is my first game, taking strong inspiration from Idle games I have played in the past, and continue to play now. There are multiple currencies that centre around education and knowledge, these must be accumulated to progress through the tree of understanding. 
-      As the game goes on, the player prestiges in multiple tiers of reset, unlocking automation and huge boosts down the line.
+      As the game goes on, the player prestiges in multiple tiers of reset, unlocking automation and huge boosts.
+      <image src={'/placeholder.svg?height=400&width=600'} alt={game.title} width={500} height={300}/>
     `
   },
 ]
 
-export default function GamePage({ params }: { params: { id: string } }) {
-  const game = games.find(g => g.id === parseInt(params.id))
+export default async function GamePage({ params }: { params: { id: string } }) {
+  const gameParams = await params;
+  const game = games.find(g => g.id === parseInt(gameParams.id))
 
   if (!game) {
     return <div>Game not found</div>

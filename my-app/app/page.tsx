@@ -10,13 +10,13 @@ const games = [
 ]
 
 const blogPosts = [
-  { id: 1, title: 'Cursor + Unity: my experience so far...', date: '2024-11-15', 'image': '/placeholder.svg?height=200&width=300', excerpt: 'AI can is part and parcel of web development, but how well does it work in mobile game development?' },
+  { id: 1, title: 'Cursor + Unity: my experience so far...', date: '2024-11-15', 'image': '/placeholder.svg?height=200&width=300', excerpt: 'AI is now part and parcel of web development, but how well does it work in mobile game development?' },
 ]
 
 const recentUpdates = [
-  { id: 1, title: 'One step closer to releasing Idle Revelations', date: '2024-11-25', type: 'game' },
+  { id: 1, title: 'Core Functionality Complete', date: '2024-11-25', type: 'game' },
   { id: 2, title: 'Blog Post: Cursor + Unity: my experience so far...', date: '2024-11-15', type: 'blog' },
-  { id: 3, title: 'IDLE Revelations make-over', date: '2024-10-05', type: 'game' },
+  { id: 3, title: 'IDLE Revelations Begins', date: '2024-6-05', type: 'game' },
 ]
 
 export default function Home() {

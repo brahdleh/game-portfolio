@@ -5,7 +5,7 @@ const games = [
   { 
     id: 1, 
     title: 'Idle Revelations', 
-    image: '/institutions_30nov.png', 
+    images: ['/institutions_30nov.png', '/institutions_30nov.png', '/institutions_30nov.png', '/institutions_30nov.png'],
     description: 'Incremental clicker following our discovery of the universe through the ages. Embark on an epic journey to carry the human race through thousands of years of discovery and advancement.',
     features: ['Multi-Layer Prestige', 'Engaging Story', 'Novel Mechanics', 'Clicking (Optional)'],
     longDescription: `
@@ -44,7 +44,11 @@ export default async function GamePage({ params }: { params: { id: string } }) {
       <h1 className="text-4xl font-bold mb-8 text-center">{game.title}</h1>
       <p className="text-lg leading-relaxed mb-8">{game.description}</p>
       <div className="gap-12 mb-12">
-        <Image src={game.image} alt={game.title} width={250} height={100} className="rounded-lg shadow-lg mb-10" />
+        <div className='grid grid-cols-4 gap-x-3'>
+          {game.images.map((image, index) => (
+            <Image key={index} src={image} alt={game.title} width={500} height={500} className="span-cols-1 rounded-lg shadow-lg mb-10" />
+          ))}
+        </div>
         <div className="space-y-4">
           <h2 className="text-2xl font-bold">Key Features:</h2>
           <ul className="list-disc list-inside space-y-1">

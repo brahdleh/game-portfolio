@@ -16,7 +16,7 @@ const games = [
       {
         title: "Core Functionality Finished",
         date: "2024-11-30",
-        description: "The ugly skeleton of Idle Revelations is complete.",
+        description: "The ugly skeleton of Idle Revelations is complete. Building a set of functionality that is complex but still intuitive is takes quite a few iterations, but I think we're there.",
         images: ['/institutions_30nov.png'],
       },
       {

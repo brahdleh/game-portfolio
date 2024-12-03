@@ -25,11 +25,10 @@ export default function Home() {
         <p className="text-xl mb-8 text-blue-400">Game Developer & Co-Founder</p>
         <p className="text-base leading-relaxed mb-4">
           After dedicating a large part of my childhood to clicking, and waiting, and clicking some more... 
-          Soaking up everything the idle incremental space had to offer, I feel more than ready to throw my hat into the ring as a developer.
+          It's time to throw my hat into the ring as a developer.
         </p>
         <p className="text-base leading-relaxed">
-          No longer shall the community be served tedious, derivative, money hungry games!
-          Come along with me on this journey to deliver novel additions to a genre that has kept us entertained for years.
+          Come along with me on this journey to deliver fun and novel additions to the incremental genre.
         </p>
       </section>
 

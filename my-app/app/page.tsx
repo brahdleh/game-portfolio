@@ -1,5 +1,3 @@
-import Image from 'next/image'
-import Link from 'next/link'
 import GameCard from './components/GameCard'
 import BlogPostCard from './components/BlogPostCard'
 import UpdateCard from './components/UpdateCard'

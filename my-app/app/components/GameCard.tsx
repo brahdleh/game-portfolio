@@ -14,7 +14,7 @@ interface GameCardProps {
 export default function GameCard({ game }: GameCardProps) {
   return (
     <div className="bg-gray-800 bg-opacity-30 backdrop-blur-sm rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:bg-opacity-50">
-      <Image src={game.image} alt={game.title} width={300} height={200} className="w-full" />
+      <Image src={game.image} alt={game.title} width={1000} height={1000} className="w-full" />
       <div className="p-4">
         <h3 className="text-xl font-bold mb-2">{game.title}</h3>
         <p className="text-sm text-gray-300 mb-4">{game.description}</p>

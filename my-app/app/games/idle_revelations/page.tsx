@@ -4,7 +4,7 @@ import Link from 'next/link';
 const game = { 
   id: 1, 
   title: 'Idle Revelations', 
-  images: ['/institutions_30nov.png', '/institutions_30nov.png', '/institutions_30nov.png', '/institutions_30nov.png'],
+  images: ['/institutions_30nov.png', '/tools_30nov.png', '/tree_30nov.png', '/amnesia_30nov.png'],
   description: 'Incremental clicker following our discovery of the universe through the ages. Embark on an epic journey to carry the human race through thousands of years of discovery and advancement.',
   features: ['Multi-Layer Prestige', 'Engaging Story', 'Novel Mechanics', 'Clicking (Optional)'],
   longDescription: `
@@ -16,7 +16,7 @@ const game = {
       title: "Core Functionality Finished",
       date: "2024-11-30",
       description: "The ugly skeleton of Idle Revelations is complete. Building a set of functionality that is complex but still intuitive is takes quite a few iterations, but I think we're there.",
-      images: ['/institutions_30nov.png'],
+      images: ['/idle_rev_thumb.png'],
     },
     {
       title: "Development Begins",

@@ -3,8 +3,8 @@ import BlogPostCard from './components/BlogPostCard'
 import UpdateCard from './components/UpdateCard'
 
 const games = [
-  { id: 1, title: 'Idle Revelations', image: '/placeholder.svg?height=200&width=300', description: 'Incremental clicker following our discovery of the universe through the ages.', url:'idle_revelations' },
-  { id: 2, title: 'Coming Soon', image: '/placeholder.svg?height=200&width=300', description: 'Something new will arrive eventually- have a little patience!', url:'idle_revelations' },
+  { id: 1, title: 'Idle Revelations', image: '/placeholder.svg?height=300&width=200', description: 'Incremental clicker following our discovery of the universe through the ages.', url:'idle_revelations' },
+  { id: 2, title: 'Coming Soon', image: '/placeholder.svg?height=300&width=200', description: 'Something new will arrive eventually- have a little patience!', url:'idle_revelations' },
 ]
 
 const blogPosts = [
@@ -25,7 +25,7 @@ export default function Home() {
         <p className="text-xl mb-8 text-blue-400">Game Developer & Co-Founder</p>
         <p className="text-base leading-relaxed mb-4">
           After dedicating a large part of my childhood to clicking, and waiting, and clicking some more... 
-          It's time to throw my hat into the ring as a developer.
+          It is time to throw my hat into the ring as a developer.
         </p>
         <p className="text-base leading-relaxed">
           Come along with me on this journey to deliver fun and novel additions to the incremental genre.

@@ -5,7 +5,7 @@ const games = [
     {
          id: 1, 
          title: 'Idle Revelations', 
-         image: '/placeholder.svg?height=200&width=300', 
+         image: '/idle_rev_thumb.png', 
          description: 'Incremental clicker following our discovery of the universe through the ages.',
          url:'idle_revelations' },
     { 

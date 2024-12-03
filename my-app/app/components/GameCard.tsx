@@ -7,6 +7,7 @@ interface GameCardProps {
     title: string
     image: string
     description: string
+    url: string
   }
 }
 
@@ -17,7 +18,7 @@ export default function GameCard({ game }: GameCardProps) {
       <div className="p-4">
         <h3 className="text-xl font-bold mb-2">{game.title}</h3>
         <p className="text-sm text-gray-300 mb-4">{game.description}</p>
-        <Link href={`/games/${game.id}`} className="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition-colors">
+        <Link href={`/games/${game.url}`} className="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition-colors">
           Learn More
         </Link>
       </div>

@@ -11,7 +11,7 @@ interface UpdateCardProps {
 }
 
 export default function UpdateCard({ update }: UpdateCardProps) {
-  const href = update.type === 'game' ? `/games/${update.id}` : `/blog/${update.url}`
+  const href = update.type === 'game' ? `/games/${update.url}` : `/blog/${update.url}`
 
   return (
     <div className="bg-gray-800 bg-opacity-30 backdrop-blur-sm rounded-lg p-4 transition-all duration-300 hover:bg-opacity-50">

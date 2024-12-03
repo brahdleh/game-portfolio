@@ -57,8 +57,8 @@ export default async function BlogPostPage() {
         <div className="prose prose-invert prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: post.content }} />
       </article>
       <div className="mt-12 text-center">
-        <Link href="/" className="inline-block bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors">
-          Back to Home
+        <Link href="/blog" className="inline-block bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors">
+          Back to Blog
         </Link>
       </div>
     </div>

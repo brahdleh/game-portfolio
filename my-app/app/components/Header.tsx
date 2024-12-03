@@ -8,6 +8,7 @@ export default function Header() {
         <nav>
           <ul className="flex space-x-4">
             <li><Link href="/" className="hover:text-blue-400 transition-colors opacity-80">Home</Link></li>
+            <li><Link href="/games" className="hover:text-blue-400 transition-colors opacity-80" >Games</Link></li>
             <li><Link href="/blog" className="hover:text-blue-400 transition-colors opacity-80" >Blog</Link></li>
           </ul>
         </nav>

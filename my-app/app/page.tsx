@@ -3,8 +3,8 @@ import BlogPostCard from './components/BlogPostCard'
 import UpdateCard from './components/UpdateCard'
 
 const games = [
-  { id: 1, title: 'Idle Revelations', image: '/placeholder.svg?height=200&width=300', description: 'Incremental clicker following our discovery of the universe through the ages.' },
-  { id: 2, title: 'Coming Soon', image: '/placeholder.svg?height=200&width=300', description: 'Something new will arrive eventually- have a little patience!' },
+  { id: 1, title: 'Idle Revelations', image: '/placeholder.svg?height=200&width=300', description: 'Incremental clicker following our discovery of the universe through the ages.', url:'idle_revelations' },
+  { id: 2, title: 'Coming Soon', image: '/placeholder.svg?height=200&width=300', description: 'Something new will arrive eventually- have a little patience!', url:'idle_revelations' },
 ]
 
 const blogPosts = [
@@ -12,9 +12,9 @@ const blogPosts = [
 ]
 
 const recentUpdates = [
-  { id: 1, title: 'Core Functionality Complete', date: '2024-11-25', type: 'game', url:'a' },
+  { id: 1, title: 'Idle Revelations: Core Functionality Complete', date: '2024-11-25', type: 'game', url:'idle_revelations' },
   { id: 2, title: 'Blog Post: Cursor + Unity: my experience so far...', date: '2024-11-15', type: 'blog', url:'cursor_plus_unity_dec_24' },
-  { id: 3, title: 'IDLE Revelations Begins', date: '2024-6-05', type: 'game', url:'a' },
+  { id: 3, title: 'IDLE Revelations Begins', date: '2024-6-05', type: 'game', url:'idle_revelations' },
 ]
 
 export default function Home() {
@@ -52,7 +52,7 @@ export default function Home() {
       </section>
 
       <section id="blog" className="max-w-3xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8 text-center">Latest Blog Posts</h2>
+        <h2 className="text-3xl font-bold mb-8 text-center">Blog Articles</h2>
         <div className="space-y-8">
           {blogPosts.map(post => (
             <BlogPostCard key={post.id} post={post} />

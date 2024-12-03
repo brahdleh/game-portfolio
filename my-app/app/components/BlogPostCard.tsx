@@ -9,6 +9,7 @@ interface BlogPostCardProps {
     image: string
     date: string
     excerpt: string
+    url: string
   }
 }
 
@@ -21,7 +22,7 @@ export default function BlogPostCard({ post }: BlogPostCardProps) {
         <Image src={post.image} alt="Image" height={100} width={100} className="w-full col-span-1" />
       </div>
       <p className="text-sm text-gray-300 mb-4">{post.excerpt}</p>
-      <Link href={`/blog/${post.id}`} className="inline-block bg-green-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-700 transition-colors">
+      <Link href={`/blog/${post.url}`} className="inline-block bg-green-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-700 transition-colors">
         Read More
       </Link>
     </div>

@@ -1,9 +1,16 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
+// This type is used to define the shape of our data.
+type BlogPost = {
+  id: number
+  title: string
+  image: string
+  date: string
+  content: string
+}
 
-const blogPosts = [
-  { 
+const post: BlogPost = { 
     id: 1, 
     title: 'Cursor + Unity: my experience so far...', 
     image: '/placeholder.svg?height=200&width=300',
@@ -35,16 +42,10 @@ const blogPosts = [
         <p>It is worth mentioning that the auto-complete can be completely wrong, and when it is, it gets in the way of clicking tab 
         to autofill a variable name, which is very counter-productive.</p>
     `
-  },
-]
-
-export default function BlogPostPage({ params }: { params: { id: string } }) {
-  const post = blogPosts.find(p => p.id === parseInt(params.id))
-
-  if (!post) {
-    return <div>Blog post not found</div>
   }
 
+
+export default async function BlogPostPage() {
   return (
     <div className="container mx-auto px-6 sm:px-10 md:px-16 lg:px-24 py-24 max-w-5xl">
       <article className="max-w-2xl mx-auto">

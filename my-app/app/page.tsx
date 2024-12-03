@@ -33,20 +33,20 @@ export default function Home() {
         </p>
       </section>
 
-      <section id="recent-updates" className="max-w-3xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8 text-center">Recent Updates</h2>
-        <div className="space-y-4">
-          {recentUpdates.map(update => (
-            <UpdateCard key={update.id} update={update} />
-          ))}
-        </div>
-      </section>
-
       <section id="games" className="max-w-3xl mx-auto space-y-16">
         <h2 className="text-3xl font-bold mb-8 text-center">My Games</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {games.map(game => (
             <GameCard key={game.id} game={game} />
+          ))}
+        </div>
+      </section>
+
+      <section id="recent-updates" className="max-w-3xl mx-auto">
+        <h2 className="text-3xl font-bold mb-8 text-center">Recent Updates</h2>
+        <div className="space-y-4">
+          {recentUpdates.map(update => (
+            <UpdateCard key={update.id} update={update} />
           ))}
         </div>
       </section>

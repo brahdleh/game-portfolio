@@ -41,6 +41,8 @@ const post: BlogPost = {
         <br/>
         <p>It is worth mentioning that the auto-complete can be completely wrong, and when it is, it gets in the way of clicking tab 
         to autofill a variable name, which is very counter-productive.</p>
+        <br/>
+        <p>Will finish soon...</p>
     `
   }
 

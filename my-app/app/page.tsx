@@ -1,6 +1,7 @@
 import GameCard from './components/GameCard'
 import BlogPostCard from './components/BlogPostCard'
 import UpdateCard from './components/UpdateCard'
+import InteractiveBackground from './components/InteractiveBackground'
 
 const games = [
   { id: 1, title: 'Idle Revelations', image: '/placeholder.svg?height=300&width=200', description: 'Incremental clicker following our discovery of the universe through the ages.', url:'idle_revelations' },
@@ -20,6 +21,7 @@ const recentUpdates = [
 export default function Home() {
   return (
     <div className="container mx-auto px-4 py-24 space-y-32 max-w-5xl">
+      <InteractiveBackground />
       <section className="text-center max-w-2xl mx-auto">
         <h1 className="text-4xl font-bold mb-6">Bradley Westwood</h1>
         <p className="text-xl mb-8 text-blue-400">Game Developer & Co-Founder</p>

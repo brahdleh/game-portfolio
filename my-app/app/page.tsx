@@ -20,23 +20,19 @@ const recentUpdates = [
 
 export default function Home() {
   return (
-    <div className="container mx-auto px-4 py-24 space-y-32 max-w-5xl">
+    <div className="container mx-auto px-4 py-24 space-y-32 w-1/2">
       <InteractiveBackground />
       <section className="text-center max-w-2xl mx-auto">
-        <h1 className="text-4xl font-bold mb-6">Bradley Westwood</h1>
-        <p className="text-xl mb-8 text-blue-400">Game Developer & Co-Founder</p>
-        <p className="text-base leading-relaxed mb-4">
-          After dedicating a large part of my childhood to clicking, and waiting, and clicking some more... 
-          It is time to throw my hat into the ring as a developer.
-        </p>
-        <p className="text-base leading-relaxed">
+        <h1 className="text-3xl font-bold mb-6">Bradley Westwood</h1>
+        <p className="text-1xl mb-8 text-blue-400">Game Developer & Co-Founder</p>
+        <p className="text-1xl leading-relaxed">
           Come along with me on this journey to deliver fun and novel additions to the incremental genre.
         </p>
       </section>
 
-      <section id="games" className="max-w-3xl mx-auto space-y-16">
-        <h2 className="text-3xl font-bold mb-8 text-center">My Games</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <section id="games" className="max-w-2xl mx-auto space-y-16">
+        <h2 className="text-xl font-bold mb-8 text-center">My Games</h2>
+        <div className="grid grid-cols-1 md:grid-cols-1 gap-12">
           {games.map(game => (
             <GameCard key={game.id} game={game} />
           ))}

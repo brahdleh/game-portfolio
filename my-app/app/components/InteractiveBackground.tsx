@@ -2,6 +2,28 @@
 
 import React, { useEffect, useRef } from 'react'
 
+class Platform {
+  x: number
+  y: number
+  width: number
+  height: number
+
+  constructor(x: number, y: number, width: number, height: number) {
+    this.x = x
+    this.y = y
+    this.width = width
+    this.height = height
+  }
+
+  draw(ctx: CanvasRenderingContext2D, scrollY: number, scale: number) {
+    ctx.fillStyle = 'black'
+    ctx.fillRect(this.x * scale, (this.y - scrollY) * scale, this.width * scale, this.height * scale)
+    ctx.strokeStyle = 'white'
+    ctx.lineWidth = 2 * scale
+    ctx.strokeRect(this.x * scale, (this.y - scrollY) * scale, this.width * scale, this.height * scale)
+  }
+}
+
 class Player {
   x: number
   y: number
@@ -23,16 +45,16 @@ class Player {
     this.absoluteY = y
   }
 
-  update(platforms: Platform[]) {
+  update(platforms: Platform[], scale: number) {
     // Apply gravity
-    this.velocityY += 0.4
-    
+    this.velocityY += 0.4 * scale
+
     // Terminal velocity
-    const maxFallSpeed = 10
+    const maxFallSpeed = 12 * scale
     if (this.velocityY > maxFallSpeed) {
       this.velocityY = maxFallSpeed
     }
-    
+
     // Apply vertical movement
     this.y += this.velocityY
 
@@ -41,86 +63,68 @@ class Player {
 
     // Calculate rendered position based on scroll
     this.y = this.absoluteY - window.scrollY
-    
+
     this.groundedPlatform = null
 
     // Check for collision with platforms
     for (const platform of platforms) {
-        if (this.x < platform.x + platform.width &&
-            this.x + this.width > platform.x &&
-            this.absoluteY < platform.y + platform.height &&
-            this.absoluteY + this.height > platform.y) {
-            
-          // Collision from above
-          if (this.velocityY > 0 && this.absoluteY + this.height - this.velocityY <= platform.y) {
-            this.absoluteY = platform.y - this.height
-            this.y = this.absoluteY - window.scrollY
-            this.velocityY = 0
-            this.isJumping = false
-            this.groundedPlatform = platform
-          }
-          // Collision from below
-          else if (this.velocityY < 0 && this.absoluteY - this.velocityY >= platform.y + platform.height) {
-            this.absoluteY = platform.y + platform.height
-            this.y = this.absoluteY - window.scrollY
-            this.velocityY = 0
-          }
+      if (
+        this.x < platform.x + platform.width &&
+        this.x + this.width > platform.x &&
+        this.absoluteY < platform.y + platform.height &&
+        this.absoluteY + this.height > platform.y
+      ) {
+        // Collision from above
+        if (
+          this.velocityY > 0 &&
+          this.absoluteY + this.height - this.velocityY <= platform.y
+        ) {
+          this.absoluteY = platform.y - this.height
+          this.y = this.absoluteY - window.scrollY
+          this.velocityY = 0
+          this.isJumping = false
+          this.groundedPlatform = platform
+        }
+        // Collision from below
+        else if (
+          this.velocityY < 0 &&
+          this.absoluteY - this.velocityY >= platform.y + platform.height
+        ) {
+          this.absoluteY = platform.y + platform.height
+          this.y = this.absoluteY - window.scrollY
+          this.velocityY = 0
         }
       }
+    }
   }
 
-  jump() {
+  jump(scale: number) {
     if (!this.isJumping && this.groundedPlatform) {
-      this.velocityY = -16
+      this.velocityY = -16 * scale
       this.isJumping = true
     }
   }
 
-  moveLeft() {
-    this.x -= 4 // move speed
+  moveLeft(scale: number) {
+    this.x -= 4 * scale // move speed
   }
 
-  moveRight() {
-    this.x += 4 // move speed
+  moveRight(scale: number) {
+    this.x += 4 * scale // move speed
   }
 
-  draw(ctx: CanvasRenderingContext2D) {
-    // Draw player using rendered position
+  draw(ctx: CanvasRenderingContext2D, scale: number) {
     ctx.fillStyle = 'red'
-    ctx.fillRect(this.x, this.y, this.width, this.height)
+    ctx.fillRect(this.x * scale, this.y * scale, this.width * scale, this.height * scale)
   }
 
-  reset() {
-    this.x = 50
-    this.absoluteY = window.scrollY + window.innerHeight / 2
+  reset(initialX: number, initialY: number) {
+    this.x = initialX
+    this.absoluteY = initialY
     this.y = this.absoluteY - window.scrollY
     this.velocityY = 0
     this.isJumping = false
     this.groundedPlatform = null
-  }
-}
-
-class Platform {
-  x: number
-  y: number
-  width: number
-  height: number
-
-  constructor(x: number, y: number, width: number, height: number) {
-    this.x = x
-    this.y = y
-    this.width = width
-    this.height = height
-  }
-
-  draw(ctx: CanvasRenderingContext2D) {
-    // Draw platform relative to scroll position
-    const adjustedY = this.y - window.scrollY
-    ctx.fillStyle = 'black'
-    ctx.fillRect(this.x, adjustedY, this.width, this.height)
-    ctx.strokeStyle = 'white'
-    ctx.lineWidth = 2
-    ctx.strokeRect(this.x, adjustedY, this.width, this.height)
   }
 }
 
@@ -129,6 +133,7 @@ const InteractiveBackground: React.FC = () => {
   const playerRef = useRef<Player | null>(null)
   const platformsRef = useRef<Platform[]>([])
   const keysRef = useRef<{ [key: string]: boolean }>({})
+  const animationFrameId = useRef<number>()
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -137,62 +142,61 @@ const InteractiveBackground: React.FC = () => {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    // Prevent space and arrow keys from scrolling
-    window.addEventListener('keydown', (e) => {
-      if (['Space', 'ArrowUp', 'ArrowDown'].includes(e.code)) {
-        e.preventDefault()
-      }
-    })
+    // Handle high-DPI screens
+    const devicePixelRatio = window.devicePixelRatio || 1
 
-    // Update canvas size on resize
-    function handleResize() {
-      if (!canvas) return
-      canvas.width = document.documentElement.scrollWidth
-      canvas.height = document.documentElement.scrollHeight
+    // Function to set canvas size
+    function setCanvasSize() {
+      canvas!.width = window.innerWidth * devicePixelRatio
+      canvas!.height = window.innerHeight * devicePixelRatio
+      canvas!.style.width = `${window.innerWidth}px`
+      canvas!.style.height = `${window.innerHeight}px`
+      ctx!.scale(devicePixelRatio, devicePixelRatio)
     }
 
-    // Initial size
-    handleResize()
+    // Initial canvas size
+    setCanvasSize()
 
-    // Listen for resize
-    window.addEventListener('resize', handleResize)
+    // Update canvas size on resize
+    window.addEventListener('resize', setCanvasSize)
 
-    // Create player at top left
-    playerRef.current = new Player(50, window.innerHeight / 2)
+    // Prevent space and arrow keys from scrolling
+    const preventDefault = (e: KeyboardEvent) => {
+      if (['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.code)) {
+        e.preventDefault()
+      }
+    }
+    window.addEventListener('keydown', preventDefault)
 
-    // Create platforms on alternating sides with varying heights
-    const platformWidth = 300
-    const platformHeight = 10
+    // Initialize player
+    const initialPlayerX = 50
+    const initialPlayerY = 50
+    playerRef.current = new Player(initialPlayerX, initialPlayerY)
+
+    // Initialize platforms
+    const platformWidth = window.innerWidth/6
+    const platformHeight = 4
     const platformGap = 150
     let isLeft = true
     platformsRef.current = []
 
-    // Create more platforms to fill the entire page height
-    const totalHeight = document.documentElement.scrollHeight
-    const numPlatforms = Math.ceil(totalHeight / platformGap)+10
+    const totalHeight = 2000 // Define a fixed total height for the game area
+    const numPlatforms = Math.ceil(totalHeight / platformGap)
 
     for (let i = 0; i < numPlatforms; i++) {
-      const x = isLeft ? 0 : canvas.width - platformWidth
-      const y = 500 + 100 + i * platformGap
+      const x = isLeft ? 0 : window.innerWidth - platformWidth
+      const y = 300 + i * platformGap
       platformsRef.current.push(new Platform(x, y, platformWidth, platformHeight))
       isLeft = !isLeft
     }
 
-    // Update player reset logic
+    // Reset player position
     function resetPlayer() {
       if (!playerRef.current) return
-      
-      playerRef.current.x = 50
-      playerRef.current.y = 50
-      playerRef.current.absoluteY = 50
-      
-      playerRef.current.velocityY = 0
-      playerRef.current.isJumping = false
-      playerRef.current.groundedPlatform = null
 
-      // Scroll to player
+      playerRef.current.reset(initialPlayerX, initialPlayerY)
       window.scrollTo({
-        top: Math.max(0, playerRef.current.y - window.innerHeight / 2),
+        top: playerRef.current.absoluteY - window.innerHeight / 2,
         behavior: 'instant'
       })
     }
@@ -201,26 +205,30 @@ const InteractiveBackground: React.FC = () => {
     function gameLoop() {
       if (!ctx || !canvas) return
 
+      // Clear canvas
       ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+      const scale = 1 // Adjust scale if necessary
 
       if (playerRef.current) {
         // Handle input
         if (keysRef.current['a'] || keysRef.current['ArrowLeft']) {
-          playerRef.current.moveLeft()
+          playerRef.current.moveLeft(scale)
         }
         if (keysRef.current['d'] || keysRef.current['ArrowRight']) {
-          playerRef.current.moveRight()
+          playerRef.current.moveRight(scale)
         }
-        if (keysRef.current[' '] || keysRef.current['w'] || keysRef.current['W']) {
-          playerRef.current.jump()
+        if (keysRef.current[' ']) {
+          playerRef.current.jump(scale)
         }
 
-        playerRef.current.update(platformsRef.current)
+        // Update player
+        playerRef.current.update(platformsRef.current, scale)
 
         // Center-focused scrolling using absolute position
-        const idealScrollY = playerRef.current.absoluteY - (window.innerHeight / 2)
+        const idealScrollY = playerRef.current.absoluteY - window.innerHeight / 2
         const minScroll = 0
-        const maxScroll = document.documentElement.scrollHeight - window.innerHeight
+        const maxScroll = totalHeight - window.innerHeight
         const targetScrollY = Math.max(minScroll, Math.min(maxScroll, idealScrollY))
 
         window.scrollTo({
@@ -229,60 +237,62 @@ const InteractiveBackground: React.FC = () => {
         })
 
         // Check if player is out of bounds
-        if (playerRef.current.y > document.documentElement.scrollHeight || 
-            playerRef.current.x < 0 || 
-            playerRef.current.x > canvas.width) {
+        if (
+          playerRef.current.absoluteY > totalHeight ||
+          playerRef.current.x < 0 ||
+          playerRef.current.x + playerRef.current.width > window.innerWidth
+        ) {
           resetPlayer()
         }
 
-        playerRef.current.draw(ctx)
+        // Draw player
+        playerRef.current.draw(ctx, scale)
       }
 
       // Draw platforms
+      const currentScrollY = window.scrollY
       for (const platform of platformsRef.current) {
-        platform.draw(ctx)
+        platform.draw(ctx, currentScrollY, 1)
       }
 
-      requestAnimationFrame(gameLoop)
+      animationFrameId.current = requestAnimationFrame(gameLoop)
     }
 
-    // Initial player setup
+    // Start the game loop
     resetPlayer()
-
-    // Start game loop
     gameLoop()
 
-    // Event listeners
-    function handleKeyDown(e: KeyboardEvent) {
+    // Event listeners for keyboard input
+    const handleKeyDown = (e: KeyboardEvent) => {
       keysRef.current[e.key] = true
     }
 
-    function handleKeyUp(e: KeyboardEvent) {
+    const handleKeyUp = (e: KeyboardEvent) => {
       keysRef.current[e.key] = false
     }
 
     window.addEventListener('keydown', handleKeyDown)
     window.addEventListener('keyup', handleKeyUp)
 
-    // Cleanup
+    // Cleanup on unmount
     return () => {
-      document.body.style.overflow = ''
-      window.removeEventListener('resize', handleResize)
+      window.removeEventListener('resize', setCanvasSize)
+      window.removeEventListener('keydown', preventDefault)
       window.removeEventListener('keydown', handleKeyDown)
       window.removeEventListener('keyup', handleKeyUp)
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current)
+      }
     }
   }, [])
 
   return (
-    <canvas 
-      ref={canvasRef} 
+    <canvas
+      ref={canvasRef}
       className="fixed top-0 left-0 w-full h-full -z-10"
-      style={{ 
-        minHeight: '100vh',
-        height: '100%',
-        width: '100%',
+      style={{
         touchAction: 'none',
-      }} 
+      }}
     />
   )
 }

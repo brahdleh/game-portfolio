@@ -20,7 +20,7 @@ const recentUpdates = [
 
 export default function Home() {
   return (
-    <div className="container mx-auto px-4 py-24 space-y-32 w-1/2">
+    <div className="container mx-auto px-4 py-24 space-y-32 w-2/3">
       <InteractiveBackground />
       <section className="text-center max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold mb-6">Bradley Westwood</h1>
@@ -58,8 +58,6 @@ export default function Home() {
       </section>
 
       <section id="Empty Space" className="max-w-3xl mx-auto space-y-40">
-        <h2 className="text-3xl opacity-0 font-bold mb-50 text-center">.</h2>
-        <h2 className="text-3xl opacity-0 font-bold mb-50 text-center">.</h2>
         <h2 className="text-3xl opacity-0 font-bold mb-50 text-center">.</h2>
         <h2 className="text-3xl opacity-0 font-bold mb-50 text-center">.</h2>
         <h2 className="text-3xl opacity-0 font-bold mb-50 text-center">.</h2>

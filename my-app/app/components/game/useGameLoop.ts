@@ -1,5 +1,4 @@
 // components/game/useGameLoop.ts
-
 import { useRef, useEffect } from 'react';
 import { Player } from './Player';
 import { Platform } from './Platform';
@@ -11,6 +10,8 @@ interface UseGameLoopProps {
     keys: { [key: string]: boolean };
     onReset: () => void;
     started: boolean;
+    goal: { x: number, y: number, width: number, height: number };
+    onGoalReached: () => void;
 }
 
 export const useGameLoop = ({
@@ -20,6 +21,8 @@ export const useGameLoop = ({
     keys,
     onReset,
     started,
+    goal,
+    onGoalReached
 }: UseGameLoopProps) => {
     const animationFrameId = useRef<number>();
 
@@ -36,7 +39,6 @@ export const useGameLoop = ({
         const devicePixelRatio = window.devicePixelRatio || 1;
 
         const setCanvasSize = () => {
-            // Safely handle window dimensions
             const windowWidth = typeof window !== 'undefined' ? window.innerWidth : 800;
             const windowHeight = typeof window !== 'undefined' ? window.innerHeight : 600;
 
@@ -54,7 +56,6 @@ export const useGameLoop = ({
         const handleResize = () => setCanvasSize();
         window.addEventListener('resize', handleResize);
 
-        // Cleanup on unmount
         return () => {
             window.removeEventListener('resize', handleResize);
             if (animationFrameId.current) {
@@ -77,7 +78,6 @@ export const useGameLoop = ({
         const totalHeight = document.body.offsetHeight;
 
         const gameLoop = () => {
-            // Retrieve window-dependent measurements inside the loop
             const windowWidth = window.innerWidth;
             const windowHeight = window.innerHeight;
             const currentScrollY = window.scrollY;
@@ -85,9 +85,9 @@ export const useGameLoop = ({
             // Clear the canvas
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            const scale = 1; // Adjust scale if necessary
+            const scale = 1; // scale factor
 
-            // Handle input (now passing windowWidth to player)
+            // Handle input
             if (keys['a'] || keys['ArrowLeft']) {
                 player.moveLeft(scale, windowWidth);
             }
@@ -98,8 +98,8 @@ export const useGameLoop = ({
                 player.jump(scale);
             }
 
-            // Update the player with all necessary environment details
-            player.update(platforms, scale, currentScrollY);
+            // Update the player
+            player.update(platforms, scale, currentScrollY, windowWidth);
 
             // Center-focused scrolling
             const idealScrollY = player.absoluteY - windowHeight / 2;
@@ -129,6 +129,22 @@ export const useGameLoop = ({
                 platform.draw(ctx, currentScrollY, scale);
             }
 
+            // Draw goal
+            ctx.fillStyle = 'gold';
+            const goalScreenY = goal.y - currentScrollY;
+            ctx.fillRect(goal.x * scale, goalScreenY * scale, goal.width * scale, goal.height * scale);
+
+            // Check if player reached goal
+            if (
+                player.x < goal.x + goal.width &&
+                player.x + player.width > goal.x &&
+                player.absoluteY < goal.y + goal.height &&
+                player.absoluteY + player.height > goal.y
+            ) {
+                onGoalReached();
+                onReset();
+            }
+
             // Continue the loop
             animationFrameId.current = requestAnimationFrame(gameLoop);
         };
@@ -136,11 +152,10 @@ export const useGameLoop = ({
         // Start the loop
         animationFrameId.current = requestAnimationFrame(gameLoop);
 
-        // Cleanup on unmount or started change
         return () => {
             if (animationFrameId.current) {
                 cancelAnimationFrame(animationFrameId.current);
             }
         };
-    }, [started, canvasRef, player, platforms, keys, onReset]);
+    }, [started, canvasRef, player, platforms, keys, onReset, goal, onGoalReached]);
 };

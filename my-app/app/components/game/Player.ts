@@ -22,23 +22,18 @@ export class Player {
         this.absoluteY = y;
     }
 
-    /**
-     * Update the player's position and velocity based on gravity, collisions, and scroll offset.
-     * @param platforms - Array of platforms for collision detection.
-     * @param scale - The game's current scale factor.
-     * @param scrollY - Current vertical scroll position of the viewport.
-     * @param windowWidth - Current width of the viewport.
-     * @param windowHeight - Current height of the viewport.
-     */
     update(
         platforms: Platform[],
         scale: number,
         scrollY: number,
+        windowWidth: number,
     ) {
+        // Dynamically scale player size based on window width
+        // Adjust these ratios as desired
+        this.width = windowWidth / 80;
+
         // Apply gravity
         this.velocityY += 0.4 * scale;
-
-        // Add window height and width to update function if required
 
         // Terminal velocity
         const maxFallSpeed = 18 * scale;
@@ -47,7 +42,6 @@ export class Player {
         }
 
         // Apply vertical movement
-        this.y += this.velocityY;
         this.absoluteY += this.velocityY;
 
         // Adjust to viewport scroll
@@ -86,10 +80,6 @@ export class Player {
         }
     }
 
-    /**
-     * Attempt a jump if player is grounded.
-     * @param scale - Game scale factor.
-     */
     jump(scale: number) {
         if (!this.isJumping && this.groundedPlatform) {
             this.velocityY = -14 * scale;
@@ -97,11 +87,6 @@ export class Player {
         }
     }
 
-    /**
-     * Move the player to the left.
-     * @param scale - Game scale factor.
-     * @param windowWidth - Current width of the viewport.
-     */
     moveLeft(scale: number, windowWidth: number) {
         const moveSpeed = (windowWidth / 400) * scale;
         this.x -= moveSpeed;
@@ -110,11 +95,6 @@ export class Player {
         }
     }
 
-    /**
-     * Move the player to the right.
-     * @param scale - Game scale factor.
-     * @param windowWidth - Current width of the viewport.
-     */
     moveRight(scale: number, windowWidth: number) {
         const moveSpeed = (windowWidth / 400) * scale;
         this.x += moveSpeed;
@@ -123,11 +103,6 @@ export class Player {
         }
     }
 
-    /**
-     * Draw the player on the canvas.
-     * @param ctx - Canvas rendering context.
-     * @param scale - Game scale factor.
-     */
     draw(ctx: CanvasRenderingContext2D, scale: number) {
         ctx.fillStyle = 'red';
         ctx.fillRect(
@@ -138,12 +113,6 @@ export class Player {
         );
     }
 
-    /**
-     * Reset the player's position and state.
-     * @param initialX - Initial X position.
-     * @param initialY - Initial Y position.
-     * @param scrollY - Current vertical scroll offset.
-     */
     reset(initialX: number, initialY: number, scrollY: number) {
         this.x = initialX;
         this.absoluteY = initialY;

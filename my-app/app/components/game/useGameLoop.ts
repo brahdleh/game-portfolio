@@ -5,127 +5,142 @@ import { Player } from './Player';
 import { Platform } from './Platform';
 
 interface UseGameLoopProps {
-  canvasRef: React.RefObject<HTMLCanvasElement>;
-  player: Player;
-  platforms: Platform[];
-  keys: { [key: string]: boolean };
-  onReset: () => void;
-  started: boolean;
+    canvasRef: React.RefObject<HTMLCanvasElement>;
+    player: Player;
+    platforms: Platform[];
+    keys: { [key: string]: boolean };
+    onReset: () => void;
+    started: boolean;
 }
 
 export const useGameLoop = ({
-  canvasRef,
-  player,
-  platforms,
-  keys,
-  onReset,
-  started,
+    canvasRef,
+    player,
+    platforms,
+    keys,
+    onReset,
+    started,
 }: UseGameLoopProps) => {
-  const animationFrameId = useRef<number>();
+    const animationFrameId = useRef<number>();
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    useEffect(() => {
+        // Guard for SSR
+        if (typeof window === 'undefined') return;
 
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+        const canvas = canvasRef.current;
+        if (!canvas) return;
 
-    const devicePixelRatio = window.devicePixelRatio || 1;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
 
-    // Function to set canvas size
-    const setCanvasSize = () => {
-      canvas.width = window.innerWidth * devicePixelRatio;
-      canvas.height = window.innerHeight * devicePixelRatio;
-      canvas.style.width = `${window.innerWidth}px`;
-      canvas.style.height = `${window.innerHeight}px`;
-      ctx.scale(devicePixelRatio, devicePixelRatio);
-    };
+        const devicePixelRatio = window.devicePixelRatio || 1;
 
-    // Initial canvas size
-    setCanvasSize();
+        const setCanvasSize = () => {
+            // Safely handle window dimensions
+            const windowWidth = typeof window !== 'undefined' ? window.innerWidth : 800;
+            const windowHeight = typeof window !== 'undefined' ? window.innerHeight : 600;
 
-    // Update canvas size on resize
-    window.addEventListener('resize', setCanvasSize);
+            canvas.width = windowWidth * devicePixelRatio;
+            canvas.height = windowHeight * devicePixelRatio;
+            canvas.style.width = `${windowWidth}px`;
+            canvas.style.height = `${windowHeight}px`;
+            ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+        };
 
-    // Cleanup on unmount
-    return () => {
-      window.removeEventListener('resize', setCanvasSize);
-      if (animationFrameId.current) {
-        cancelAnimationFrame(animationFrameId.current);
-      }
-    };
-  }, [canvasRef, devicePixelRatio]);
+        // Set initial canvas size
+        setCanvasSize();
 
-  useEffect(() => {
-    if (!started) return; // Do not start the game loop if not started
+        // Update canvas size on resize
+        const handleResize = () => setCanvasSize();
+        window.addEventListener('resize', handleResize);
 
-    const canvas = canvasRef.current;
-    const ctx = canvas?.getContext('2d');
-    if (!ctx || !canvas) return;
+        // Cleanup on unmount
+        return () => {
+            window.removeEventListener('resize', handleResize);
+            if (animationFrameId.current) {
+                cancelAnimationFrame(animationFrameId.current);
+            }
+        };
+    }, [canvasRef]);
 
-    const totalHeight = window.document.body.offsetHeight;
+    useEffect(() => {
+        // Do not start the loop if not started
+        if (!started) return;
 
-    const gameLoop = () => {
-      // Clear canvas
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Guard for SSR
+        if (typeof window === 'undefined') return;
 
-      const scale = 1; // Adjust scale if necessary
+        const canvas = canvasRef.current;
+        const ctx = canvas?.getContext('2d');
+        if (!ctx || !canvas) return;
 
-      // Handle input
-      if (keys['a'] || keys['ArrowLeft']) {
-        player.moveLeft(scale);
-      }
-      if (keys['d'] || keys['ArrowRight']) {
-        player.moveRight(scale);
-      }
-      if (keys[' ']) {
-        player.jump(scale);
-      }
+        const totalHeight = document.body.offsetHeight;
 
-      // Update player
-      player.update(platforms, scale);
+        const gameLoop = () => {
+            // Retrieve window-dependent measurements inside the loop
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+            const currentScrollY = window.scrollY;
 
-      // Center-focused scrolling using absolute position
-      const idealScrollY = player.absoluteY - window.innerHeight / 2;
-      const minScroll = 0;
-      const maxScroll = totalHeight - window.innerHeight;
-      const targetScrollY = Math.max(minScroll, Math.min(maxScroll, idealScrollY));
+            // Clear the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      window.scrollTo({
-        top: targetScrollY,
-        behavior: 'auto',
-      });
+            const scale = 1; // Adjust scale if necessary
 
-      // Check if player is out of bounds, with buffer, shouldn't be possible anyway
-      if (
-        player.absoluteY > totalHeight ||
-        player.x < -10 ||
-        player.x + player.width > 10 + window.innerWidth
-      ) {
-        onReset();
-      }
+            // Handle input (now passing windowWidth to player)
+            if (keys['a'] || keys['ArrowLeft']) {
+                player.moveLeft(scale, windowWidth);
+            }
+            if (keys['d'] || keys['ArrowRight']) {
+                player.moveRight(scale, windowWidth);
+            }
+            if (keys[' ']) {
+                player.jump(scale);
+            }
 
-      // Draw player
-      player.draw(ctx, scale);
+            // Update the player with all necessary environment details
+            player.update(platforms, scale, currentScrollY);
 
-      // Draw platforms
-      const currentScrollY = window.scrollY;
-      for (const platform of platforms) {
-        platform.draw(ctx, currentScrollY, scale);
-      }
+            // Center-focused scrolling
+            const idealScrollY = player.absoluteY - windowHeight / 2;
+            const minScroll = 0;
+            const maxScroll = totalHeight - windowHeight;
+            const targetScrollY = Math.max(minScroll, Math.min(maxScroll, idealScrollY));
 
-      // Continue the loop
-      animationFrameId.current = requestAnimationFrame(gameLoop);
-    };
+            window.scrollTo({
+                top: targetScrollY,
+                behavior: 'auto',
+            });
 
-    // Start the game loop
-    animationFrameId.current = requestAnimationFrame(gameLoop);
+            // Check if player is out of bounds
+            if (
+                player.absoluteY > totalHeight ||
+                player.x < -10 ||
+                player.x + player.width > 10 + windowWidth
+            ) {
+                onReset();
+            }
 
-    // Cleanup when 'started' changes or component unmounts
-    return () => {
-      if (animationFrameId.current) {
-        cancelAnimationFrame(animationFrameId.current);
-      }
-    };
-  }, [started, canvasRef, player, platforms, keys, onReset]);
+            // Draw player
+            player.draw(ctx, scale);
+
+            // Draw platforms
+            for (const platform of platforms) {
+                platform.draw(ctx, currentScrollY, scale);
+            }
+
+            // Continue the loop
+            animationFrameId.current = requestAnimationFrame(gameLoop);
+        };
+
+        // Start the loop
+        animationFrameId.current = requestAnimationFrame(gameLoop);
+
+        // Cleanup on unmount or started change
+        return () => {
+            if (animationFrameId.current) {
+                cancelAnimationFrame(animationFrameId.current);
+            }
+        };
+    }, [started, canvasRef, player, platforms, keys, onReset]);
 };

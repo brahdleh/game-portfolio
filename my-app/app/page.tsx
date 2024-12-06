@@ -56,6 +56,15 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <section id="Empty Space" className="max-w-3xl mx-auto space-y-40">
+        <h2 className="text-3xl opacity-0 font-bold mb-50 text-center">.</h2>
+        <h2 className="text-3xl opacity-0 font-bold mb-50 text-center">.</h2>
+        <h2 className="text-3xl opacity-0 font-bold mb-50 text-center">.</h2>
+        <h2 className="text-3xl opacity-0 font-bold mb-50 text-center">.</h2>
+        <h2 className="text-3xl opacity-0 font-bold mb-50 text-center">.</h2>
+        <h2 className="text-3xl opacity-0 font-bold mb-50 text-center">.</h2>
+      </section>
     </div>
   )
 }

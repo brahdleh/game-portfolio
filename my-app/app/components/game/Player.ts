@@ -28,7 +28,7 @@ export class Player {
     this.velocityY += 0.4 * scale;
 
     // Terminal velocity
-    const maxFallSpeed = 12 * scale;
+    const maxFallSpeed = 18 * scale;
     if (this.velocityY > maxFallSpeed) {
       this.velocityY = maxFallSpeed;
     }
@@ -73,17 +73,19 @@ export class Player {
 
   jump(scale: number) {
     if (!this.isJumping && this.groundedPlatform) {
-      this.velocityY = -16 * scale;
+      this.velocityY = -14 * scale;
       this.isJumping = true;
     }
   }
 
   moveLeft(scale: number) {
-    this.x -= (window.innerWidth / 300) * scale; // move speed
+    this.x -= (window.innerWidth / 400) * scale; // move speed
+    if (this.x<0) {this.x=0;}
   }
 
   moveRight(scale: number) {
-    this.x += (window.innerWidth / 300) * scale; // move speed
+    this.x += (window.innerWidth / 400) * scale; // move speed
+    if (this.x + this.width > window.innerWidth) {this.x = window.innerWidth - this.width;}
   }
 
   draw(ctx: CanvasRenderingContext2D, scale: number) {

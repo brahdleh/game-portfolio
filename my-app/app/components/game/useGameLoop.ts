@@ -96,11 +96,11 @@ export const useGameLoop = ({
         behavior: 'auto',
       });
 
-      // Check if player is out of bounds
+      // Check if player is out of bounds, with buffer, shouldn't be possible anyway
       if (
         player.absoluteY > totalHeight ||
-        player.x < 0 ||
-        player.x + player.width > window.innerWidth
+        player.x < -10 ||
+        player.x + player.width > 10 + window.innerWidth
       ) {
         onReset();
       }

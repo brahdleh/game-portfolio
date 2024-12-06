@@ -12,8 +12,8 @@ const StartButton: React.FC<StartButtonProps> = ({ onStart }) => {
       onClick={onStart}
       style={{
         position: 'fixed',
-        top: 10,
-        left: 10,
+        top: 80,
+        left: 20,
         zIndex: 10,
         padding: '10px 20px',
         fontSize: '16px',

@@ -1,7 +1,7 @@
 import GameCard from './components/GameCard'
 import BlogPostCard from './components/BlogPostCard'
 import UpdateCard from './components/UpdateCard'
-import InteractiveBackground from './components/InteractiveBackground'
+import InteractiveBackground from './components/game/InteractiveBackground'
 
 const games = [
   { id: 1, title: 'Idle Revelations', image: '/placeholder.svg?height=300&width=200', description: 'Incremental clicker following our discovery of the universe through the ages.', url:'idle_revelations' },

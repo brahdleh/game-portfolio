@@ -6,8 +6,8 @@ import Footer from './components/Footer'
 const spaceGrotesk = Space_Grotesk({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Game Developer Portfolio',
-  description: 'A showcase of my game development projects and blog posts',
+  title: 'BW Portfolio',
+  description: 'A showcase of my game development and blog posts',
 }
 
 export default function RootLayout({

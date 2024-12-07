@@ -25,6 +25,7 @@ export const useGameLoop = ({
     onGoalReached
 }: UseGameLoopProps) => {
     const animationFrameId = useRef<number>();
+    
 
     useEffect(() => {
         // Guard for SSR

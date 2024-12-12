@@ -23,8 +23,8 @@ export default function BlogPostCard({ post }: BlogPostCardProps) {
           src={post.image} 
           alt={post.title} 
           height={100} 
-          width={100} 
-          className="w-full col-span-1" 
+          width={100}
+          className="w-full col-span-1 p-3"
         />
       </div>
       <p className="text-sm text-gray-300 mb-4 line-clamp-2">{post.excerpt}</p>

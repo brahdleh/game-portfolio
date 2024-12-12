@@ -9,7 +9,7 @@ const games = [
 ]
 
 const blogPosts = [
-  { id: 1, title: 'Cursor + Unity: my experience so far...', date: '2024-11-15', 'image': '/placeholder.svg?height=200&width=300', excerpt: 'AI is now part and parcel of web development, but how well does it work in mobile game development?', url:'cursor_plus_unity_dec_24' },
+  { id: 1, title: 'Cursor + Unity: my experience so far...', date: '2024-11-15', 'image': '/cursor.png', excerpt: 'AI is now part and parcel of web development, but how well does it work in mobile game development?', url:'cursor_plus_unity_dec_24' },
 ]
 
 const recentUpdates = [

@@ -12,6 +12,7 @@ interface UseGameLoopProps {
     started: boolean;
     goal: { x: number, y: number, width: number, height: number };
     onGoalReached: () => void;
+    totalHeight: number;
 }
 
 export const useGameLoop = ({
@@ -22,7 +23,8 @@ export const useGameLoop = ({
     onReset,
     started,
     goal,
-    onGoalReached
+    onGoalReached,
+    totalHeight
 }: UseGameLoopProps) => {
     const animationFrameId = useRef<number>();
     
@@ -76,8 +78,6 @@ export const useGameLoop = ({
         const ctx = canvas?.getContext('2d');
         if (!ctx || !canvas) return;
 
-        const totalHeight = document.body.offsetHeight;
-
         const gameLoop = () => {
             const windowWidth = window.innerWidth;
             const windowHeight = window.innerHeight;
@@ -96,11 +96,11 @@ export const useGameLoop = ({
                 player.moveRight(scale, windowWidth);
             }
             if (keys[' ']) {
-                player.jump(scale);
+                player.jump(scale, totalHeight);
             }
 
             // Update the player
-            player.update(platforms, scale, currentScrollY, windowWidth);
+            player.update(platforms, scale, currentScrollY, windowWidth, totalHeight);
 
             // Center-focused scrolling
             const idealScrollY = player.absoluteY - windowHeight / 2;
@@ -158,5 +158,7 @@ export const useGameLoop = ({
                 cancelAnimationFrame(animationFrameId.current);
             }
         };
-    }, [started, canvasRef, player, platforms, keys, onReset, goal, onGoalReached]);
+    }, [started, canvasRef, player, platforms, keys, onReset, goal, onGoalReached, totalHeight]);
+
+    return null;
 };

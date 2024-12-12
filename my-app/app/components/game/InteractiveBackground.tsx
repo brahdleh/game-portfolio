@@ -23,14 +23,23 @@ const InteractiveBackground: React.FC = () => {
     // Replace direct window usage with useState and useEffect
     const [platforms, setPlatforms] = useState<Platform[]>([]);
     const [goal, setGoal] = useState<Goal>({ x: 100, y: 280, width: 10, height: 10 }); //placeholder for type issues
+    const [totalHeight, setTotalHeight] = useState<number>(4000); // default height
 
     // Initialize platforms and goal after mount and on resize
     useEffect(() => {
         // Initial setup function
         const setupGame = () => {
+            if (typeof window === 'undefined') return;
+            
             const windowWidth = window.innerWidth;
-            setPlatforms(getCustomPlatforms(windowWidth).map(platform => new Platform(platform)));
-            setGoal(getGoal(windowWidth));
+            const pageHeight = Math.max(
+                document.documentElement.scrollHeight,
+                4000 // minimum height
+            );
+            
+            setTotalHeight(pageHeight);
+            setPlatforms(getCustomPlatforms(windowWidth, pageHeight).map(platform => new Platform(platform)));
+            setGoal(getGoal(windowWidth, pageHeight));
         };
 
         // Run initial setup
@@ -76,7 +85,7 @@ const InteractiveBackground: React.FC = () => {
     useGameLoop({
         canvasRef,
         player: playerRef.current,
-        platforms: platforms,
+        platforms,
         keys: keysRef.current,
         onReset: resetPlayer,
         started,
@@ -88,7 +97,8 @@ const InteractiveBackground: React.FC = () => {
                 alert(`Congratulations! You reached the goal in ${timeTaken} seconds.`);
             }
             resetPlayer();
-        }
+        },
+        totalHeight,
     });
 
     // Handle keyboard input (client-side only)

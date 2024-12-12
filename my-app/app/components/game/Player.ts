@@ -27,16 +27,20 @@ export class Player {
         scale: number,
         scrollY: number,
         windowWidth: number,
+        totalHeight: number,
     ) {
-        // Dynamically scale player size based on window width
-        // Adjust these ratios as desired
+        // Scale player dimensions
         this.width = windowWidth / 80;
+        this.height = totalHeight / 100;
 
-        // Apply gravity
-        this.velocityY += 0.4 * scale;
+        // Scale gravity and terminal velocity with total height
+        const heightScale = totalHeight / 4000; // baseline height of 4000px
+        
+        // Apply gravity (scaled)
+        this.velocityY += 0.5 * scale * heightScale;
 
-        // Terminal velocity
-        const maxFallSpeed = 18 * scale;
+        // Terminal velocity (scaled)
+        const maxFallSpeed = 20 * scale * heightScale;
         if (this.velocityY > maxFallSpeed) {
             this.velocityY = maxFallSpeed;
         }
@@ -80,15 +84,16 @@ export class Player {
         }
     }
 
-    jump(scale: number) {
+    jump(scale: number, totalHeight: number) {
         if (!this.isJumping && this.groundedPlatform) {
-            this.velocityY = -14 * scale;
+            const heightScale = totalHeight / 4000;
+            this.velocityY = -15 * scale * heightScale;
             this.isJumping = true;
         }
     }
 
     moveLeft(scale: number, windowWidth: number) {
-        const moveSpeed = (windowWidth / 400) * scale;
+        const moveSpeed = (windowWidth / 350) * scale;
         this.x -= moveSpeed;
         if (this.x < 0) {
             this.x = 0;
@@ -96,7 +101,7 @@ export class Player {
     }
 
     moveRight(scale: number, windowWidth: number) {
-        const moveSpeed = (windowWidth / 400) * scale;
+        const moveSpeed = (windowWidth / 350) * scale;
         this.x += moveSpeed;
         if (this.x + this.width > windowWidth) {
             this.x = windowWidth - this.width;

@@ -32,7 +32,7 @@ const game = {
 
 export default async function GamePage() {
   return (
-    <div className="container mx-auto px-6 sm:px-10 md:px-16 lg:px-24 py-24 max-w-5xl">
+    <div className="container mx-auto px-6 sm:px-10 md:px-16 lg:px-24 py-48 max-w-5xl">
       <h1 className="text-4xl font-bold mb-8 text-center">{game.title}</h1>
       <p className="text-lg leading-relaxed mb-8">{game.description}</p>
       <div className="gap-12 mb-12">

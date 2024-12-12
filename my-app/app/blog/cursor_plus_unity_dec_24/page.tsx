@@ -49,7 +49,7 @@ const post: BlogPost = {
 
 export default async function BlogPostPage() {
   return (
-    <div className="container mx-auto px-6 sm:px-10 md:px-16 lg:px-24 py-24 max-w-5xl">
+    <div className="container mx-auto px-6 sm:px-10 md:px-16 lg:px-24 py-48 max-w-5xl">
       <article className="max-w-2xl mx-auto">
         <header className="mb-8">
           <h1 className="text-4xl font-bold mb-4">{post.title}</h1>

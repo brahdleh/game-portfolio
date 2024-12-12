@@ -5,13 +5,13 @@ const games = [
     {
          id: 1, 
          title: 'Idle Revelations', 
-         image: '/placeholder.svg?height=200&width=300', 
+         image: '/flasks.png', 
          description: 'Incremental clicker following our discovery of the universe through the ages.',
          url:'idle_revelations' },
     { 
         id: 2, 
         title: 'Coming Soon', 
-        image: '/placeholder.svg?height=200&width=300', 
+        image: '/question.png', 
         description: 'Something new will arrive eventually- have a little patience!',
         url:'idle_revelations' },
 ]

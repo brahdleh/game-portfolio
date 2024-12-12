@@ -4,8 +4,8 @@ import UpdateCard from './components/UpdateCard'
 import InteractiveBackground from './components/game/InteractiveBackground'
 
 const games = [
-  { id: 1, title: 'Idle Revelations', image: '/placeholder.svg?height=300&width=200', description: 'Incremental clicker following our discovery of the universe through the ages.', url:'idle_revelations' },
-  { id: 2, title: 'Coming Soon', image: '/placeholder.svg?height=300&width=200', description: 'Something new will arrive eventually- have a little patience!', url:'idle_revelations' },
+  { id: 1, title: 'Idle Revelations', image: '/flasks.png', description: 'Incremental clicker following our discovery of the universe through the ages.', url:'idle_revelations' },
+  { id: 2, title: 'Coming Soon', image: '/question.png', description: 'Something new will arrive eventually- have a little patience!', url:'idle_revelations' },
 ]
 
 const blogPosts = [
@@ -20,9 +20,9 @@ const recentUpdates = [
 
 export default function Home() {
   return (
-    <div className="container mx-auto px-4 py-24 space-y-32 w-2/3">
+    <div className="container mx-auto px-4 py-24 space-y-32 w-2/3 relative">
       <InteractiveBackground />
-      <section className="text-center max-w-2xl mx-auto">
+      <section className="text-center max-w-2xl mx-auto relative z-10">
         <h1 className="text-3xl font-bold mb-6">Bradley Westwood</h1>
         <p className="text-1xl mb-8 text-blue-400">Game Developer</p>
         <p className="text-1xl leading-relaxed">
@@ -30,7 +30,7 @@ export default function Home() {
         </p>
       </section>
 
-      <section id="games" className="max-w-2xl mx-auto space-y-16">
+      <section id="games" className="max-w-2xl mx-auto space-y-16 relative z-100">
         <h2 className="text-xl font-bold mb-8 text-center">My Games</h2>
         <div className="grid grid-cols-1 md:grid-cols-1 gap-12">
           {games.map(game => (
@@ -39,7 +39,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="recent-updates" className="max-w-3xl mx-auto">
+      <section id="recent-updates" className="max-w-3xl mx-auto relative z-100">
         <h2 className="text-3xl font-bold mb-8 text-center">Recent Updates</h2>
         <div className="space-y-4">
           {recentUpdates.map(update => (
@@ -48,7 +48,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="blog" className="max-w-3xl mx-auto">
+      <section id="blog" className="max-w-3xl mx-auto relative z-100">
         <h2 className="text-3xl font-bold mb-8 text-center">Blog Articles</h2>
         <div className="space-y-8">
           {blogPosts.map(post => (

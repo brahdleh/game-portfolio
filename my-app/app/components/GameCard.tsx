@@ -13,13 +13,13 @@ interface GameCardProps {
 
 export default function GameCard({ game }: GameCardProps) {
   return (
-    <div className="bg-gray-800 bg-opacity-30 backdrop-blur-sm rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:bg-opacity-50 max-w-sm mx-auto">
+    <div className="bg-gray-800 bg-opacity-30 backdrop-blur-sm rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:bg-opacity-50 max-w-md mx-auto">
       <Image 
         src={game.image} 
         alt={game.title} 
         width={400} 
-        height={225} 
-        className="w-full h-48 object-cover"
+        height={400} 
+        className="w-full h-90 object-cover p-10"
       />
       <div className="p-4">
         <h3 className="text-xl font-bold mb-2">{game.title}</h3>

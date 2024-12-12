@@ -26,10 +26,6 @@ const post: BlogPost = {
         <p>Essentially, AI dev tools like Cursor and Windsurf massively streamline the process of going back and forth with ChatGPT, 
         slowly refining code piece by piece. Equally, if you are the beginning of your project they can lay a solid foundation
         for you to build on.</p>
-        </br>
-        <p>You quickly find it is much more efficient to work with AI when it is able to see your entire repository,
-        and when it is able to make changes itself. As there are so many interconnected scripts and classes in a unity
-        project, this feature lends itself very nicely.</p>
         <br/>
         <br/>
         <h1>Auto-Complete</h1>
@@ -55,6 +51,12 @@ const post: BlogPost = {
         <br/>
         <p>Using Cursor removes the struggle of going back and forth with ChatGPT or Claude, and allows you to agree to code changes line by line.
         This means you catch moments where the AI has misunderstood, or make improvements to their implementation.</p>
+        <p>Unity gives you no choice but to learn C#, as a beginner it can be easy to miss key functionality that can make your game more robust, 
+        and your code more organised. Cursor can tell you when a new class should be defined, and write the entire script defining it.</p>
+        <br/>
+        <p>You quickly find it is much more efficient to work with AI when it is able to see your entire repository,
+        and when it is able to make changes itself. As there are so many interconnected scripts and classes in a unity
+        project, this feature lends itself very nicely.</p>
         <br/>
         <br/>
         <p>Conclusion</p>

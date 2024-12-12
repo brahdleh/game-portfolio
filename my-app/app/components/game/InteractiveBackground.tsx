@@ -23,7 +23,7 @@ const InteractiveBackground: React.FC = () => {
     // Replace direct window usage with useState and useEffect
     const [platforms, setPlatforms] = useState<Platform[]>([]);
     const [goal, setGoal] = useState<Goal>({ x: 100, y: 280, width: 10, height: 10 }); //placeholder for type issues
-    const [totalHeight, setTotalHeight] = useState<number>(4000); // default height
+    const [totalHeight, setTotalHeight] = useState<number>(3500); // default height
 
     // Initialize platforms and goal after mount and on resize
     useEffect(() => {
@@ -32,10 +32,7 @@ const InteractiveBackground: React.FC = () => {
             if (typeof window === 'undefined') return;
             
             const windowWidth = window.innerWidth;
-            const pageHeight = Math.max(
-                document.documentElement.scrollHeight,
-                4000 // minimum height
-            );
+            const pageHeight = document.documentElement.scrollHeight;
             
             setTotalHeight(pageHeight);
             setPlatforms(getCustomPlatforms(windowWidth, pageHeight).map(platform => new Platform(platform)));

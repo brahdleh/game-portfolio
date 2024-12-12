@@ -24,7 +24,7 @@ export default function Home() {
       <InteractiveBackground />
       <section className="text-center max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold mb-6">Bradley Westwood</h1>
-        <p className="text-1xl mb-8 text-blue-400">Game Developer & Co-Founder</p>
+        <p className="text-1xl mb-8 text-blue-400">Game Developer</p>
         <p className="text-1xl leading-relaxed">
           Come along with me on this journey to deliver fun and novel additions to the incremental genre.
         </p>
@@ -58,10 +58,7 @@ export default function Home() {
       </section>
 
       <section id="Empty Space" className="max-w-3xl mx-auto space-y-40">
-        <h2 className="text-3xl opacity-0 font-bold mb-50 text-center">.</h2>
-        <h2 className="text-3xl opacity-0 font-bold mb-50 text-center">.</h2>
-        <h2 className="text-3xl opacity-0 font-bold mb-50 text-center">.</h2>
-        <h2 className="text-3xl opacity-0 font-bold mb-50 text-center">.</h2>
+        <h2 className="text-2xl opacity-0 font-bold text-center">.</h2>
       </section>
     </div>
   )

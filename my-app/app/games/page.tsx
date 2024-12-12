@@ -18,10 +18,10 @@ const games = [
 
 export default function BlogPage() {
   return (
-    <div className="container mx-auto px-4 py-24 space-y-32 max-w-5xl">
+    <div className="container mx-auto px-4 py-48 space-y-32 w-2/3">
       <section className="text-center max-w-2xl mx-auto">
-        <h1 className="text-4xl font-bold mb-6">My Games</h1>
-        <p className="text-xl mb-8 text-blue-400">Made for Mobile, Live and in Development</p>
+        <h1 className="text-3xl font-bold mb-6">My Games</h1>
+        <p className="text-1xl mb-8 text-blue-400">Made for Mobile, Live and in Development</p>
       </section>
 
       <section id="blog-posts" className="max-w-3xl mx-auto">

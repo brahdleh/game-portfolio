@@ -19,7 +19,7 @@ export default function GameCard({ game }: GameCardProps) {
         alt={game.title} 
         width={400} 
         height={400} 
-        className="w-full h-90 object-cover px-36 py-5"
+        className="w-full h-90 object-cover px-24 py-5"
       />
       <div className="p-4">
         <h3 className="text-xl font-bold mb-2">{game.title}</h3>

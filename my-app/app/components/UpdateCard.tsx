@@ -21,7 +21,7 @@ export default function UpdateCard({ update }: UpdateCardProps) {
         </span>
         <span className="text-sm text-gray-400">{update.date}</span>
       </div>
-      <h3 className="text-lg font-semibold">{update.title}</h3>
+      <h3 className="text-md">{update.title}</h3>
       <Link
         href={href}
         className="text-sm text-blue-400 hover:underline mt-2 inline-block"

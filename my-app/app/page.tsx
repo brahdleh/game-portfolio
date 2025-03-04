@@ -88,9 +88,6 @@ export default function Home() {
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-repeat opacity-20 z-0"></div>
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-400 to-transparent z-0"></div>
         <div className="absolute inset-0 overflow-hidden z-0">
-          <div className="absolute -top-24 -right-24 w-96 h-96 bg-blue-500 opacity-40 rounded-full blur-3xl"></div>
-          <div className="absolute top-1/3 -left-24 w-72 h-72 bg-blue-500 opacity-40 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-24 -right-24 w-80 h-80 bg-blue-400 opacity-40 rounded-full blur-3xl"></div>
         </div>
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -112,21 +109,12 @@ export default function Home() {
         </div>
       </section>
       
-      {/* Improved section transition */}
-      <div className="relative z-20">
-        <div className="absolute inset-x-0 h-16 bg-gradient-to-b from-blue-800 to-emerald-900"></div>
-      </div>
-      
       {/* Recent Updates Section - improved background */}
       <section id="recent-updates" className="py-24 md:py-32 relative">
         {/* Improved background effects for updates section */}
-        <div className="absolute inset-0 bg-gradient-to-b from-emerald-900 via-teal-800 to-green-800 z-0"></div>
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-repeat opacity-20 z-0"></div>
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-green-400 to-transparent z-0"></div>
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-400 to-transparent z-0"></div>
         <div className="absolute inset-0 overflow-hidden z-0">
-          <div className="absolute top-1/4 -right-24 w-80 h-80 bg-green-500 opacity-30 rounded-full blur-3xl"></div>
-          <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-emerald-500 opacity-25 rounded-full blur-3xl"></div>
-          <div className="absolute top-3/4 right-1/3 w-64 h-64 bg-teal-400 opacity-20 rounded-full blur-3xl"></div>
         </div>
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -149,21 +137,12 @@ export default function Home() {
         </div>
       </section>
       
-      {/* Improved section transition */}
-      <div className="relative z-20">
-        <div className="absolute inset-x-0 h-16 bg-gradient-to-b from-green-800 to-purple-900"></div>
-      </div>
-      
       {/* Blog Articles Section - improved background */}
       <section id="blog" className="py-24 md:py-32 relative">
         {/* Improved background effects for blog section */}
-        <div className="absolute inset-0 bg-gradient-to-b from-purple-900 via-violet-800 to-indigo-800 z-0"></div>
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-repeat opacity-20 z-0"></div>
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-purple-400 to-transparent z-0"></div>
         <div className="absolute inset-0 overflow-hidden z-0">
-          <div className="absolute -top-24 -left-24 w-96 h-96 bg-purple-500 opacity-30 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-indigo-500 opacity-25 rounded-full blur-3xl"></div>
-          <div className="absolute top-2/3 left-1/3 w-64 h-64 bg-violet-400 opacity-20 rounded-full blur-3xl"></div>
         </div>
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -175,15 +154,15 @@ export default function Home() {
             gradient="from-purple-300 to-purple-100"
           />
           
-          <div className="max-w-4xl mx-auto space-y-8">
+          <div className="max-w-3xl mx-auto space-y-8">
             {blogPosts.map(post => (
               <div key={post.id} className="transform transition-all duration-300 hover:-translate-y-2 backdrop-blur-sm">
                 <BlogPostCard post={post} />
               </div>
             ))}
             
-            <div className="text-center mt-12">
-              <Link href="/blog" className="group inline-block px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] relative overflow-hidden">
+            <div className="text-center mt-24">
+              <Link href="/blog" className="group inline-block px-6 py-3 bg-black border border-purple-600 text-white rounded-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] relative overflow-hidden">
                 <span className="relative z-10">View All Blog Posts</span>
                 <span className="absolute inset-0 bg-gradient-to-r from-purple-500 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               </Link>
@@ -194,11 +173,9 @@ export default function Home() {
       
       {/* Call to action section - Improved gradient background */}
       <section className="py-16 md:py-24 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-indigo-800 via-blue-800 to-blue-700 z-0"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-grey-800 via-blue-800 to-blue-800 z-0"></div>
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-repeat opacity-20 z-0"></div>
         <div className="absolute inset-0 overflow-hidden z-0">
-          <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-cyan-500 opacity-25 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 left-1/3 w-72 h-72 bg-blue-400 opacity-20 rounded-full blur-3xl"></div>
         </div>
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">

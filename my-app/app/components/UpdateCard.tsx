@@ -23,7 +23,7 @@ export default function UpdateCard({ update }: UpdateCardProps) {
             }`}>
               {update.type === 'game' ? 'GAME UPDATE' : 'BLOG POST'}
             </span>
-            <h3 className="text-xl font-semibold mb-2 text-white">{update.title}</h3>
+            <h3 className="text-l font-semibold mb-2 text-white">{update.title}</h3>
             <p className="text-gray-400 text-sm">{update.date}</p>
           </div>
           <div className="ml-4">

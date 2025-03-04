@@ -2,6 +2,7 @@ import './globals.css'
 import { Space_Grotesk } from 'next/font/google'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import Head from 'next/head'
 
 const spaceGrotesk = Space_Grotesk({ subsets: ['latin'] })
 
@@ -16,13 +17,16 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${spaceGrotesk.className} bg-gray-900 text-gray-100 min-h-screen flex flex-col scroll-smooth`}>
+    <html lang="en" className="dark scroll-smooth">
+      <Head>
+        {/* Add this to enable smooth scrolling */}
+        <link href="/grid.svg" rel="preload" as="image" />
+      </Head>
+      <body className={`${spaceGrotesk.className} bg-gray-900 text-gray-100 min-h-screen flex flex-col`}>
         <div className="flex-grow flex flex-col relative">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-grey-900 via-blue-600 to-blue-500 opacity-50 z-0"></div>
           <div className="relative z-10 flex flex-col min-h-screen">
             <Header />
-            <main className="flex-grow px-6 sm:px-10 md:px-16 lg:px-24">
+            <main className="flex-grow">
               {children}
             </main>
             <Footer />

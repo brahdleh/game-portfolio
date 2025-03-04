@@ -47,7 +47,7 @@ export default function Header() {
               </Link>
             </li>
             <li>
-              <Link href="/games" className="text-white hover:text-blue-400 transition-colors font-medium">
+              <Link href="/#games" className="text-white hover:text-blue-400 transition-colors font-medium">
                 Games
               </Link>
             </li>
@@ -81,7 +81,7 @@ export default function Header() {
               </li>
               <li>
                 <Link 
-                  href="/games" 
+                  href="/#games" 
                   className="text-white hover:text-blue-400 transition-colors block py-2"
                   onClick={() => setIsMenuOpen(false)}
                 >

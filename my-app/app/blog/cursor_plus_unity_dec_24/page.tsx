@@ -34,10 +34,6 @@ const post: BlogPost = {
         <p class="mb-4">For example, if I have a function called 'InstitutionClick' that is called when an institution upgrade is clicked. 
         This involves several variables of different types in different classes.</p> 
         
-        <div class="my-6 bg-gray-800 p-4 rounded-lg">
-          <Image src="/code-example.png" alt="Code Example" width={800} height={400} className="w-full rounded" />
-        </div>
-        
         <p class="mb-4">If I then decided to start typing 'MasteryUpgr..." Cursor is able to create an entire function, 
         substituting out each institution variable and class for their analagous mastery counterpart.</p>
         

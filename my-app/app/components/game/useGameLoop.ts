@@ -95,7 +95,7 @@ export const useGameLoop = ({
             if (keys['d'] || keys['ArrowRight']) {
                 player.moveRight(scale, windowWidth);
             }
-            if (keys[' ']) {
+            if (keys['w'] || keys[' ']) {
                 player.jump(scale, totalHeight);
             }
 

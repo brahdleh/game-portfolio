@@ -3,7 +3,7 @@
 import GameCard from './components/GameCard'
 import BlogPostCard from './components/BlogPostCard'
 import UpdateCard from './components/UpdateCard'
-//import InteractiveBackground from './components/game/InteractiveBackground'
+import InteractiveBackground from './components/game/InteractiveBackground'
 import Link from 'next/link'
 
 const games = [
@@ -55,7 +55,7 @@ export default function Home() {
   return (
     <div className="relative">
       
-      {/*<InteractiveBackground />*/}
+      <InteractiveBackground />
       
       {/* Hero Section with improved background */}
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden">

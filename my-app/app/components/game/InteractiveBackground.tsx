@@ -2,12 +2,11 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import StartButton from './StartButton';
 import { Platform } from './Platform';
 import { Player } from './Player';
 import { useGameLoop } from './useGameLoop';
-import MobileControls from './MobileControls';
 import { getCustomPlatforms, getGoal } from './Platform';
+import Header from '../Header';
 
 type Goal = {
     x: number;
@@ -148,6 +147,7 @@ const InteractiveBackground: React.FC = () => {
     const startGame = () => {
         resetPlayer();
         setStarted(true);
+        setGameStarted(true);
     };
 
     // Touch handlers for mobile controls
@@ -174,28 +174,17 @@ const InteractiveBackground: React.FC = () => {
 
     // Don't render anything on mobile
     if (isMobile) {
-        return null;
+        return <Header />;
     }
 
     return (
         <>
-            {!gameStarted && <StartButton onStart={startGame} />}
+            <Header onStartGame={startGame} gameStarted={gameStarted} />
             
             <canvas
                 ref={canvasRef}
-                className={`absolute inset-0 w-full h-full ${gameStarted ? 'opacity-20' : 'opacity-0'} transition-opacity duration-500 -z-10`}
+                className={`fixed inset-0 w-full h-full ${started ? 'opacity-50' : 'opacity-0'} transition-opacity duration-500 z-0`}
             />
-
-            {gameStarted && (
-                <MobileControls
-                    onLeftStart={handleLeftTouchStart}
-                    onLeftEnd={handleLeftTouchEnd}
-                    onRightStart={handleRightTouchStart}
-                    onRightEnd={handleRightTouchEnd}
-                    onJumpStart={handleJumpTouchStart}
-                    onJumpEnd={handleJumpTouchEnd}
-                />
-            )}
         </>
     );
 };

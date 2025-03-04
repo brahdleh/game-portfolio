@@ -3,7 +3,12 @@
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 
-export default function Header() {
+interface HeaderProps {
+  onStartGame?: () => void;
+  gameStarted?: boolean;
+}
+
+export default function Header({ onStartGame, gameStarted = false }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -20,9 +25,19 @@ export default function Header() {
       isScrolled ? 'bg-gray-900 shadow-lg' : 'bg-gray-800 bg-opacity-50 backdrop-blur-md'
     }`}>
       <div className="container mx-auto px-6 sm:px-10 md:px-16 lg:px-24 flex justify-between items-center">
-        <Link href="/" className="text-2xl font-bold text-white hover:text-blue-400 transition-colors">
-          PORTFOLIO & BLOG
-        </Link>
+        <div className="flex items-center space-x-10">
+          {onStartGame && !gameStarted && (
+            <button
+              onClick={onStartGame}
+              className="bg-black text-white px-4 py-2 rounded-md border border-blue-500/50 shadow-[0_0_15px_rgba(59,130,246,0.6)] hover:shadow-[0_0_20px_rgba(59,130,246,0.8)] transition-all duration-300"
+            >
+              Start
+            </button>
+          )}
+          <Link href="/" className="text-2xl font-bold text-white hover:text-blue-400 transition-colors">
+            PORTFOLIO & BLOG
+          </Link>
+        </div>
         
         {/* Mobile menu button */}
         <button 

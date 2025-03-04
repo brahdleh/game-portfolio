@@ -5,7 +5,7 @@ const game = {
   id: 1, 
   title: 'Desktop Miner', 
   images: ['/desktop_miner.png'],
-  description: 'Browser based mining game to kill the time.',
+  description: 'Browser based mining game to kill the time. Play it here: https://desktop-miner.vercel.app/',
   features: ['Mining', 'Crafting', 'Automating'],
   longDescription: `
     Browser game built entirely in React.

@@ -24,6 +24,8 @@ const InteractiveBackground: React.FC = () => {
     const [platforms, setPlatforms] = useState<Platform[]>([]);
     const [goal, setGoal] = useState<Goal>({ x: 100, y: 280, width: 10, height: 10 }); //placeholder for type issues
     const [totalHeight, setTotalHeight] = useState<number>(3500); // default height
+    const [gameStarted, setGameStarted] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
 
     // Initialize platforms and goal after mount and on resize
     useEffect(() => {
@@ -49,6 +51,19 @@ const InteractiveBackground: React.FC = () => {
         return () => {
             window.removeEventListener('resize', setupGame);
         };
+    }, []);
+
+    // Check if the device is mobile
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        
+        // Check initially and on resize
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        
+        return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
     const keysRef = useRef<{ [key: string]: boolean }>({});
@@ -157,17 +172,21 @@ const InteractiveBackground: React.FC = () => {
         keysRef.current[' '] = false;
     };
 
+    // Don't render anything on mobile
+    if (isMobile) {
+        return null;
+    }
+
     return (
-        <div>
-            {!started && <StartButton onStart={startGame} />}
+        <>
+            {!gameStarted && <StartButton onStart={startGame} />}
             
             <canvas
                 ref={canvasRef}
-                className="fixed top-0 left-0 w-full h-full -z-10"
-                style={{ touchAction: 'none' }}
+                className={`absolute inset-0 w-full h-full ${gameStarted ? 'opacity-20' : 'opacity-0'} transition-opacity duration-500 -z-10`}
             />
 
-            {started && (
+            {gameStarted && (
                 <MobileControls
                     onLeftStart={handleLeftTouchStart}
                     onLeftEnd={handleLeftTouchEnd}
@@ -177,7 +196,7 @@ const InteractiveBackground: React.FC = () => {
                     onJumpEnd={handleJumpTouchEnd}
                 />
             )}
-        </div>
+        </>
     );
 };
 

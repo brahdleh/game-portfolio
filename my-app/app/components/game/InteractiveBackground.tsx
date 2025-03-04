@@ -150,28 +150,6 @@ const InteractiveBackground: React.FC = () => {
         setGameStarted(true);
     };
 
-    // Touch handlers for mobile controls
-    const handleLeftTouchStart = () => {
-        keysRef.current['a'] = true;
-    };
-    const handleLeftTouchEnd = () => {
-        keysRef.current['a'] = false;
-    };
-
-    const handleRightTouchStart = () => {
-        keysRef.current['d'] = true;
-    };
-    const handleRightTouchEnd = () => {
-        keysRef.current['d'] = false;
-    };
-
-    const handleJumpTouchStart = () => {
-        keysRef.current[' '] = true;
-    };
-    const handleJumpTouchEnd = () => {
-        keysRef.current[' '] = false;
-    };
-
     // Don't render anything on mobile
     if (isMobile) {
         return <Header />;

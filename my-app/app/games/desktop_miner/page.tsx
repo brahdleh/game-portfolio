@@ -3,26 +3,18 @@ import Link from 'next/link';
 
 const game = { 
   id: 1, 
-  title: 'Idle Revelations', 
-  images: ['/institutions_30nov.png', '/tools_30nov.png', '/tree_30nov.png', '/amnesia_30nov.png'],
-  description: 'Incremental clicker following our discovery of the universe through the ages. Embark on an epic journey to carry the human race through thousands of years of discovery and advancement.',
-  features: ['Multi-Layer Prestige', 'Engaging Story', 'Novel Mechanics', 'Clicking (Optional)'],
+  title: 'Desktop Miner', 
+  images: ['/desktop_miner.png'],
+  description: 'Browser based mining game to kill the time.',
+  features: ['Mining', 'Crafting', 'Automating'],
   longDescription: `
-    This is my first game, taking strong inspiration from Idle games I have played in the past, and continue to play now. There are multiple currencies that centre around education and knowledge, these must be accumulated to progress through the tree of understanding. 
-    As the game goes on, the player prestiges in multiple tiers of reset, unlocking automation and huge boosts.
+    Browser game built entirely in React.
   `,
   updates: [
     {
-      title: "Core Functionality Finished",
-      date: "2024-11-30",
-      description: "The ugly skeleton of Idle Revelations is complete. Building a set of functionality that is complex but still intuitive is takes quite a few iterations, but I think we're there.",
-      images: ['/idle_rev_thumb.png'],
-    },
-    {
       title: "Development Begins",
-      date: "2024-04-01",
-      description: `Unity has been installed, youtube tutorials have been watched, and ideas have started to be materialised.
-      There is a bit of a learning curve to C#, and managing the script architecture is challenging, but progress is now underway!
+      date: "2025-02-14",
+      description: `With advances in AI, I thought it would be good to try and build a browser game using it.
       `,
       images: [],
     },

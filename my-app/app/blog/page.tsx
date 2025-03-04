@@ -6,7 +6,7 @@ const blogPosts = [
     id: 1, 
     title: 'Cursor + Unity: my experience so far...', 
     date: '2024-11-15', 
-    image: '/placeholder.svg?height=200&width=300', 
+    image: '/cursor.png', 
     excerpt: 'AI is now part and parcel of web development, but how well does it work in mobile game development?',
     url: '/cursor_plus_unity_dec_24'
   },
@@ -14,7 +14,7 @@ const blogPosts = [
     id: 2, 
     title: 'Coming Soon...', 
     date: '2024-10-20', 
-    image: '/placeholder.svg?height=200&width=300', 
+    image: '/question.png', 
     excerpt: 'Watch this space.',
     url: '/cursor_plus_unity_dec_24'
   },

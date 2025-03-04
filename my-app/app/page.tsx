@@ -8,7 +8,7 @@ import Link from 'next/link'
 
 const games = [
   { id: 1, title: 'Idle Revelations', image: '/flasks.png', description: 'Incremental clicker following our discovery of the universe through the ages.', url:'idle_revelations' },
-  { id: 2, title: 'Coming Soon', image: '/question.png', description: 'Something new will arrive eventually- have a little patience!', url:'idle_revelations' },
+  { id: 2, title: 'Desktop Miner', image: '/desktop_miner.png', description: 'Browser based mining game to kill the time.', url:'desktop_miner' },
 ]
 
 const blogPosts = [

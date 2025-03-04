@@ -35,9 +35,9 @@ export default function GuideCard({ guide }: GuideCardProps) {
       <div className="p-6">
         <h3 className="text-xl font-bold mb-3 text-white">{guide.title}</h3>
         <p className="text-gray-300 mb-4">{guide.excerpt}</p>
-        <Link href={`/guides/${guide.url}`} className="inline-block bg-green-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-700 transition-colors">
+        {/*<Link href={`/guides/${guide.url}`} className="inline-block bg-green-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-700 transition-colors">
           Read Guide
-        </Link>
+        </Link>*/}
       </div>
     </div>
   )
